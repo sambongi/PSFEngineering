@@ -26,8 +26,8 @@
 Sampled 2D square image of a point light source located at $\mathbf{p} = (x_{p}, y_{p}, z_{p})$ is
 
 \begin{equation}
-	\mathbf{h}[m, n](\mathbf{p}, w, \boldsymbol{\mu}_{s}) = \alpha \left|   h_{\mathcal{A}} (x_{p} + m \Delta,  y_{p} + n \Delta, z_{p}, 
-	s, \boldsymbol{\mu}_{s})    \right|^{2} + \beta \quad  \text{for } m, n \in {0, 1, 2, \ldots, N},
+	\mathbf{h}[m, n](\mathbf{p}, \boldsymbol{\mu}_{w}) = \alpha \left|   h_{\mathcal{A}} (x_{p} + m \Delta,  y_{p} + n \Delta, z_{p}, 
+	\boldsymbol{\mu}_{w})    \right|^{2} + \beta \quad  \text{for } m, n \in {0, 1, 2, \ldots, N},
 \end{equation}
 
 \noindent where $w$ is the $w$ th  shot using Zernike polynomials $\boldsymbol{\mu}_{w}$
@@ -35,21 +35,21 @@ Sampled 2D square image of a point light source located at $\mathbf{p} = (x_{p},
 CRLB is calculated as
 
 \begin{equation}
-	CRLB(\mathbf{p}, w, \boldsymbol{\mu}_{s}) = \left[   \sum_{m=0}^{N-1} \sum_{n=0}^{N-1}
-	\frac{1}{\alpha \mathbf{h} [m, n] (\mathbf{p}, w, \boldsymbol{\mu}_{w}) + \beta}	    
-	\left(  \frac{\partial  \mathbf{h}[m, n] (\mathbf{p}, w, \boldsymbol{\mu}_{w})}{\partial \boldsymbol{\theta}} \right) ^{2}
+	CRLB(\mathbf{p}, \boldsymbol{\mu}_{w}) = \left[  \sum_{w}^{K}  \sum_{m=0}^{N-1} \sum_{n=0}^{N-1}
+	\frac{1}{\alpha \mathbf{h} [m, n] (\mathbf{p}, \boldsymbol{\mu}_{w}) + \beta}	    
+	\left(  \frac{\partial  \mathbf{h}[m, n] (\mathbf{p}, \boldsymbol{\mu}_{w})}{\partial \boldsymbol{\theta}} \right) ^{2}
 	\right]^{-1},
 \end{equation}
 
 \noindent
-where $\boldsymbol{\theta} = (x_{p}, y_{p}, z_{p}, w)$. 
+where $\boldsymbol{\theta} = (x_{p}, y_{p}, z_{p})$. 
 We solve a minimization problem
 
 
 \begin{equation}
 	\min_{\boldsymbol{\mu}_{s} \in \mathbb{R}^{L}} \ell (\boldsymbol{\mu}) = 
-	\sum_{z \in Z} \sum_{\boldsymbol{\theta} \in \{ x_{p}, y_{p}, z_{p}, w \} }
-	\left. \sqrt{CRLB(\mathbf{p}, w, \boldsymbol{\mu}_{w})}
+	\sum_{z \in Z} \sum_{\boldsymbol{\theta} \in \{ x_{p}, y_{p}, z_{p}\} }
+	\left. \sqrt{CRLB(\mathbf{p}, \boldsymbol{\mu}_{w})}
 	\right|_{z_{p} = z}
 \end{equation}
 
@@ -57,12 +57,12 @@ We solve a minimization problem
 Linear combination of Zernike polynomials is
 
 \begin{align*}
-	| P(\xi, \eta, w, \boldsymbol{\mu}_{w}) | &=
+	| P(\xi, \eta, \boldsymbol{\mu}_{w}) | &=
 		\begin{cases}
 			1 \quad \text{for } \sqrt{\xi^{2} + \eta^{2}} < a \\
 			0 \quad \text{for otherwise}
 	        \end{cases} \\
-	        \arg [ P(\xi, \eta, w, \boldsymbol{\mu}_{w}) ] &=
+	        \arg [ P(\xi, \eta, \boldsymbol{\mu}_{w}) ] &=
 		        \begin{cases}
 	        		\sum_{i = 1}^{L} \mu_{wi} Z_{i} (\xi, \eta) \quad \text{for } \sqrt{\xi^{2} + \eta^{2}} < a \\
 			0 \quad \text{for otherwise}.
