@@ -1,172 +1,181 @@
-% Last Modified:Thu, 24 May 2012 14:53:05 +0900
+% Last Modified: July 28 2017 14:53:05 +0900
 
 
-\documentclass[letter, 11pt]{article}
-%\usepackage{fancyhdr}
-\usepackage{lastpage}
-\usepackage{tabularx} 
-\usepackage{color}
-\usepackage[dvipdfmx]{graphicx}
-\usepackage{here}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{mathtools}
+¥documentclass[letter, 11pt]{article}
+%¥usepackage{fancyhdr}
+¥usepackage{lastpage}
+¥usepackage{tabularx} 
+¥usepackage{color}
+¥usepackage[dvipdfmx]{graphicx}
+¥usepackage{here}
+¥usepackage{amsmath}
+¥usepackage{amsfonts}
+¥usepackage{mathtools}
 
 
 % set margin of page
-\usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+¥usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
 
-%\pagestyle{fancy}
+%¥pagestyle{fancy}
 
 
 
 %%%%%%%%%%%%%%% Main %%%%%%%%%%%%%%%
-\begin{document}
+¥begin{document}
 
-Sampled 2D square image of a point light source located at $\mathbf{p} = (x_{p}, y_{p}, z_{p})$ is
+Sampled 2D square image of a point light source located at $¥mathbf{p} = (x_{p}, y_{p}, z_{p})$ is
 
-\begin{equation}
-	\mathbf{h}[m, n](\mathbf{p}, \boldsymbol{\mu}_{w}) = \alpha \left|   h_{\mathcal{A}} (x_{p} + m \Delta,  y_{p} + n \Delta, z_{p}, 
-	\boldsymbol{\mu}_{w})    \right|^{2} + \beta \quad  \text{for } m, n \in {0, 1, 2, \ldots, N},
-\end{equation}
+¥begin{equation}
+	¥mathbf{h}[m, n](¥mathbf{p}, ¥boldsymbol{¥mu}_{w}) = ¥alpha ¥left|   h_{¥mathcal{A}} (x_{p} + m ¥Delta,  y_{p} + n ¥Delta, z_{p}, 
+	¥boldsymbol{¥mu}_{w})    ¥right|^{2} + ¥beta ¥quad  ¥text{for } m, n ¥in {0, 1, 2, ¥ldots, N},
+¥end{equation}
 
-\noindent where $w$ is the $w$ th  shot using Zernike polynomials $\boldsymbol{\mu}_{w}$
+¥noindent where $w$ is the $w$ th  shot using Zernike polynomials $¥boldsymbol{¥mu}_{w}$
 
 CRLB is calculated as
 
-\begin{equation}
-	CRLB(\mathbf{p}, \boldsymbol{\mu}_{w}) = \left[  \sum_{w}^{K}  \sum_{m=0}^{N-1} \sum_{n=0}^{N-1}
-	\frac{1}{\alpha \mathbf{h} [m, n] (\mathbf{p}, \boldsymbol{\mu}_{w}) + \beta}	    
-	\left(  \frac{\partial  \mathbf{h}[m, n] (\mathbf{p}, \boldsymbol{\mu}_{w})}{\partial \boldsymbol{\theta}} \right) ^{2}
-	\right]^{-1},
-\end{equation}
+¥begin{equation}
+	CRLB(¥mathbf{p}, ¥boldsymbol{¥mu}_{w}) = ¥left[  ¥sum_{w}^{K}  ¥sum_{m=0}^{N-1} ¥sum_{n=0}^{N-1}
+	¥frac{1}{¥mathbf{h} [m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w}) + ¥beta}	    
+	¥left(  ¥frac{¥partial  ¥mathbf{h}[m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}{¥partial ¥boldsymbol{¥theta}} ¥right) ^{2}
+	¥right]^{-1},
+¥end{equation}
 
-\noindent
-where $\boldsymbol{\theta} = (x_{p}, y_{p}, z_{p})$. 
+¥noindent
+where $¥boldsymbol{¥theta} = (x_{p}, y_{p}, z_{p})$. 
 We solve a minimization problem
 
+¥begin{equation}
+	¥min_{¥boldsymbol{¥mu}_{w} ¥in ¥mathbb{R}^{L}} ¥ell (¥boldsymbol{¥mu}) = 
+	¥sum_{z ¥in ¥mathcal{Z}} ¥sum_{¥boldsymbol{¥theta} ¥in ¥{ x_{p}, y_{p}, z_{p}¥} }
+	¥left. ¥sqrt{CRLB(¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}
+	¥right|_{z_{p} = z}
+¥end{equation}
 
-\begin{equation}
-	\min_{\boldsymbol{\mu}_{s} \in \mathbb{R}^{L}} \ell (\boldsymbol{\mu}) = 
-	\sum_{z \in Z} \sum_{\boldsymbol{\theta} \in \{ x_{p}, y_{p}, z_{p}\} }
-	\left. \sqrt{CRLB(\mathbf{p}, \boldsymbol{\mu}_{w})}
-	\right|_{z_{p} = z}
-\end{equation}
-
-\noindent
+¥noindent
 Linear combination of Zernike polynomials is
 
-\begin{align*}
-	| P(\xi, \eta, \boldsymbol{\mu}_{w}) | &=
-		\begin{cases}
-			1 \quad \text{for } \sqrt{\xi^{2} + \eta^{2}} < a \\
-			0 \quad \text{for otherwise}
-	        \end{cases} \\
-	        \arg [ P(\xi, \eta, \boldsymbol{\mu}_{w}) ] &=
-		        \begin{cases}
-	        		\sum_{i = 1}^{L} \mu_{wi} Z_{i} (\xi, \eta) \quad \text{for } \sqrt{\xi^{2} + \eta^{2}} < a \\
-			0 \quad \text{for otherwise}.
-	        \end{cases}
-\end{align*}
+¥begin{align*}
+	| P(¥xi, ¥eta, ¥boldsymbol{¥mu}_{w}) | &=
+		¥begin{cases}
+			1 ¥quad ¥text{for } ¥sqrt{¥xi^{2} + ¥eta^{2}} < a ¥¥
+			0 ¥quad ¥text{for otherwise}
+	        ¥end{cases} ¥¥
+	        ¥arg [ P(¥xi, ¥eta, ¥boldsymbol{¥mu}_{w}) ] &=
+		        ¥begin{cases}
+	        		¥sum_{i = 1}^{L} ¥mu_{wi} Z_{i} (¥xi, ¥eta) ¥quad ¥text{for } ¥sqrt{¥xi^{2} + ¥eta^{2}} < a ¥¥
+			0 ¥quad ¥text{for otherwise}.
+	        ¥end{cases}
+¥end{align*}
 
-\noindent
+¥noindent
 The partial derivatives of the amplitude point spread function are
 
 
-\begin{align*}
-	\begin{split}
-		\frac{\partial}{\partial x_{p}}  h_{\mathcal{A}}(x, y, z, w, \boldsymbol{\mu}) &= 
-		\gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1} 
-		\left( - j 2 \pi \frac{s / \Delta}{S} \right) \exp \left[ - j 2 \pi \left( \frac{s x / \Delta}{S} + 
-		\frac{t y / \Delta }{T} \right) \right] \\
-		&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad 
-		\exp \left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^{2} + 
-		{\left( \frac{t}{T} \right)}^{2} ) }{ n_{i} \Delta^{2} } \right] P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu} \right)}
-	\end{split} \\
-	\begin{split}
-		\frac{\partial}{\partial y_{p}} h_{\mathcal{A}} (x, y, z, w, \boldsymbol{\mu}) &=
-		\gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1} 
-		\left( - j 2 \pi \frac{t / \Delta}{T} \right) \exp \left[ - j 2 \pi \left( \frac{s x / \Delta}{S} + 
-		\frac{t y / \Delta }{T} \right) \right] \\
-		&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad 
-		\exp \left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^{2} + 
-		{\left( \frac{t}{T} \right)}^{2} ) }{ n_{}i \Delta^{2} } \right] P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu} \right)}
-	\end{split} \\
-	\begin{split}
-		\frac{\partial}{\partial z_{p}} h_{\mathcal{A}}(x, y, z, w, \boldsymbol{\mu}) &=
-		\gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1} 
-		\left( \frac{- j \pi \lambda ( { \left( \frac{s}{S} \right) }^{2} + {\left( \frac{t}{T} \right)}^2 )}{ n_{i} \Delta^2 } \right) \exp 
-		\left[ - j 2 \pi \left( \frac{s x /\Delta}{S} + \frac{t y / \Delta }{T} \right) \right] \\
-		&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad 
-		\exp \left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^{2} + {\left( \frac{t}{T} \right)}^{2} ) }{ n_{i} \Delta^2 } \right] 
-		P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, \boldsymbol{\mu} \right)} 
-	\end{split} \\
-	\begin{split}
-		\frac{\partial}{\partial w} h_{\mathcal{A}} (x, y, z, w, \boldsymbol{\mu}) &=
-		\gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1} 
-		\exp \left[ - j 2 \pi \left( \frac{s x / \Delta}{S} + 
-		\frac{t y / \Delta }{T} \right) \right] 
-		\exp \left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^{2} + 		
-		{\left( \frac{t}{T} \right)}^{2} ) }{ n_{}i \Delta^{2} } \right]  \\
-		&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad 
-		\frac{\partial}{\partial w} P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu} \right)}.
-	\end{split}
-\end{align*}
+¥begin{align*}
+	¥begin{split}
+		¥frac{¥partial}{¥partial x_{p}}  h_{¥mathcal{A}}(x, y, z, ¥boldsymbol{¥mu}_{w}) &= 
+		¥gamma ¥sum¥limits_{s = - ¥frac{S}{2} }^{¥frac{S}{2} - 1} ¥sum¥limits_{t = - ¥frac{T}{2} }^{¥frac{T}{2} - 1} 
+		¥left( - j 2 ¥pi ¥frac{s / ¥Delta}{S} ¥right) ¥exp ¥left[ - j 2 ¥pi ¥left( ¥frac{s x / ¥Delta}{S} + 
+		¥frac{t y / ¥Delta }{T} ¥right) ¥right] ¥¥
+		&¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad 
+		¥exp ¥left[ ¥frac{- j ¥pi ¥lambda z ( { ¥left( ¥frac{s}{S} ¥right) }^{2} + 
+		{¥left( ¥frac{t}{T} ¥right)}^{2} ) }{ n_{i} ¥Delta^{2} } ¥right] P^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT}, ¥boldsymbol{¥mu}_{w} ¥right)}
+	¥end{split} ¥¥
+	¥begin{split}
+		¥frac{¥partial}{¥partial y_{p}} h_{¥mathcal{A}} (x, y, z, ¥boldsymbol{¥mu}_{w}) &=
+		¥gamma ¥sum¥limits_{s = - ¥frac{S}{2} }^{¥frac{S}{2} - 1} ¥sum¥limits_{t = - ¥frac{T}{2} }^{¥frac{T}{2} - 1} 
+		¥left( - j 2 ¥pi ¥frac{t / ¥Delta}{T} ¥right) ¥exp ¥left[ - j 2 ¥pi ¥left( ¥frac{s x / ¥Delta}{S} + 
+		¥frac{t y / ¥Delta }{T} ¥right) ¥right] ¥¥
+		&¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad 
+		¥exp ¥left[ ¥frac{- j ¥pi ¥lambda z ( { ¥left( ¥frac{s}{S} ¥right) }^{2} + 
+		{¥left( ¥frac{t}{T} ¥right)}^{2} ) }{ n_{}i ¥Delta^{2} } ¥right] P^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT}, ¥boldsymbol{¥mu}_{w} ¥right)}
+	¥end{split} ¥¥
+	¥begin{split}
+		¥frac{¥partial}{¥partial z_{p}} h_{¥mathcal{A}}(x, y, z, ¥boldsymbol{¥mu}_{w}) &=
+		¥gamma ¥sum¥limits_{s = - ¥frac{S}{2} }^{¥frac{S}{2} - 1} ¥sum¥limits_{t = - ¥frac{T}{2} }^{¥frac{T}{2} - 1} 
+		¥left( ¥frac{- j ¥pi ¥lambda ( { ¥left( ¥frac{s}{S} ¥right) }^{2} + {¥left( ¥frac{t}{T} ¥right)}^2 )}{ n_{i} ¥Delta^2 } ¥right) ¥exp 
+		¥left[ - j 2 ¥pi ¥left( ¥frac{s x /¥Delta}{S} + ¥frac{t y / ¥Delta }{T} ¥right) ¥right] ¥¥
+		&¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad 
+		¥exp ¥left[ ¥frac{- j ¥pi ¥lambda z ( { ¥left( ¥frac{s}{S} ¥right) }^{2} + {¥left( ¥frac{t}{T} ¥right)}^{2} ) }{ n_{i} ¥Delta^2 } ¥right] 
+		P^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT}, ¥boldsymbol{¥mu}_{w} ¥right)} 
+	¥end{split} ¥¥
+¥end{align*}
 
 
-\noindent
-We introduce difference approximation of derivation of $P$.
+¥noindent
 
-\begin{equation*}
-	\frac{\partial}{\partial w} P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu} \right)}
-	= P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w+1, \boldsymbol{\mu} \right)} -
-	P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu} \right)}
-\end{equation*}
+¥vspace{.5cm}
+
+We derive the gradient of the functional $¥ell (¥boldsymbol{¥mu}_{w})$ with respect to the parameter $¥mu_{wi}$ for the gradient-based
+optimization algorithm.
+
+
+¥begin{align*}
+	¥begin{split}
+		¥frac{¥partial ¥ell (¥boldsymbol{¥mu}_{w})}{¥partial ¥mu_{wi}} &= ¥sum_{z ¥in ¥mathcal{Z}}  ¥sum_{p ¥in ¥{ x_{p}, y_{p}, z_{p} ¥} }
+		¥frac{¥partial}{¥partial ¥mu_{wi}}  ¥left. ¥left[  ¥sum_{m=0}^{N-1}  ¥sum_{n=0}^{N-1} ¥frac{1}{¥alpha ¥mathbf{h}[m, n]
+		(¥mathbf{p}, ¥boldsymbol{¥mu}_{w}) + ¥beta}
+		¥left(  ¥frac{¥partial ¥mathbf{h} [m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}{¥partial p_{i}} ¥right)^{2}    ¥right]^{-¥frac{1}{2}} ¥right|_{z_{p} = z} ¥¥
+		& = ¥sum_{z ¥in ¥mathcal{Z}}  ¥sum_{p ¥in ¥{ x_{p}, y_{p}, z_{p} ¥} } -¥frac{1}{2}
+		¥left[  ¥sum_{m=0}^{N-1}  ¥sum_{n=0}^{N-1} ¥frac{1}{¥alpha ¥mathbf{h}[m, n]
+		(¥mathbf{p}, ¥boldsymbol{¥mu}_{w}) + ¥beta}
+		¥left(  ¥frac{¥partial ¥mathbf{h} [m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}{¥partial p_{i}} ¥right)^{2}    ¥right]^{-¥frac{3}{2}} ¥¥
+		& ¥quad ¥left.   ¥left[   ¥sum_{m=0}^{N-1}  ¥sum_{n=0}^{N-1} ¥frac{1}{(¥alpha ¥mathbf{h} [m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w}) + ¥beta)^{2}} 
+		¥left[  2 (¥alpha ¥mathbf{h} [m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w}) + ¥beta) 
+		¥frac{¥partial ¥mathbf{h}[m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}{¥partial p_{i}} 
+		¥frac{¥partial^{2} ¥mathbf{h}[m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}{¥partial p_{i} ¥partial ¥mu_{i}}  ¥right. ¥right. ¥right. ¥¥
+		& ¥quad ¥left. ¥left. ¥left. 
+		- ¥alpha ¥frac{¥partial ¥mathbf{h}[m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}{¥partial ¥mu_{wi}} ¥left(  
+		¥frac{¥partial ¥mathbf{h}[m, n] (¥mathbf{p}, ¥boldsymbol{¥mu}_{w})}{¥partial p_{i}}  ¥right)^{2}
+		¥right]  ¥right]             ¥right|_{z_{p} = z}
+	¥end{split}
+¥end{align*}
 
 
 The partial derivative of the amplitude PSF with respect to the phase parameter is
 
-\begin{align*}
-	\begin{split}
-		\frac{\partial}{\partial \mu_{wi}} h_{\mathcal{A}} (x, y, z, w, \boldsymbol{\mu}_{w}) &= 
-		j \gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1}  
-		\exp \left[ - j 2 \pi \left( \frac{s x / \Delta}{S} + \frac{t y / \Delta }{T} \right) \right] \exp 
-		\left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^{2} + {\left( \frac{t}{T} \right)}^{2} ) }
-		{n_{i} \Delta^2 } \right] \\
-		&\qquad \qquad \qquad \qquad \qquad \qquad \qquad \qquad 
-		Z_i^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT} \right)} 
-		P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu}_{w} \right)} 
-	\end{split} \\
-	\begin{split}
-		\frac{\partial^{2}}{\partial x_{p} \partial \mu_{wi}} h_{\mathcal{A}} (x, y, z, w, \boldsymbol{\mu}_{w}) &=
-		j \gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1} 
-		\left( - j 2 \pi \frac{s / \Delta}{S} \right) \exp \left[ - j 2 \pi \left( \frac{s x / \Delta}{S} + \frac{t y / \Delta }{T} \right) \right]  \\
-		&\qquad \qquad \qquad \qquad 
-		\exp \left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^2 + {\left( \frac{t}{T} \right)}^2 ) }
-		{ n_{i} \Delta^2 } \right]
-		Z_i^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT} \right)} P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu}_{w} \right)}
-	\end{split} \\
-	\begin{split}
-		\frac{\partial^{2}}{\partial y_{p} \partial \mu_{wi}} h_{\mathcal{A}} (x, y, z, w, \boldsymbol{\mu}_{w}) &= 
-		j \gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1} 
-		\left( - j 2 \pi \frac{t / \Delta}{T} \right) \exp \left[ - j 2 \pi \left( \frac{s x / \Delta}{S} + 
-		\frac{t y / \Delta }{T} \right) \right]  \\
-		&\qquad \qquad \qquad \qquad 
-		\exp \left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^{2} + 
-		{\left( \frac{t}{T} \right)}^2 ) }{ n_{i} \Delta^2 } \right]
-		Z_i^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT} \right)} P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu}_{w} \right)}
-    \end{split} \\
-    \begin{split}
-    		\frac{\partial^{2}}{\partial z_{p} \partial \mu_{wi}} h_{\mathcal{A}} (x, y, z, w, \boldsymbol{\mu}_{w}) &= 
-		j \gamma \sum\limits_{s = - \frac{S}{2} }^{\frac{S}{2} - 1} \sum\limits_{t = - \frac{T}{2} }^{\frac{T}{2} - 1} 
-		\left( \frac{- j \pi \lambda ( { \left( \frac{s}{S} \right) }^{2} + {\left( \frac{t}{T} \right)}^{2} ) }
-		{ n_{i} \Delta^{2} } \right) \exp \left[ - j 2 \pi \left( \frac{s x / \Delta}{S} + \frac{t y / \Delta }{T} \right) \right] \\
-		& \qquad \qquad \qquad \qquad  
-		\exp \left[ \frac{- j \pi \lambda z ( { \left( \frac{s}{S} \right) }^2 + {\left( \frac{t}{T} \right)}^2 ) }{ n_i \Delta^2 } \right] 
-		Z_i^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT} \right)} P^{\prime} {\left( \frac{s}{cS}, \frac{t}{cT}, w, \boldsymbol{\mu}_{w} \right)}.
-    \end{split}
-\end{align*}
+¥begin{align*}
+	¥begin{split}
+		¥frac{¥partial}{¥partial ¥mu_{wi}} h_{¥mathcal{A}} (x, y, z, ¥boldsymbol{¥mu}_{w}) &= 
+		j ¥gamma ¥sum¥limits_{s = - ¥frac{S}{2} }^{¥frac{S}{2} - 1} ¥sum¥limits_{t = - ¥frac{T}{2} }^{¥frac{T}{2} - 1}  
+		¥exp ¥left[ - j 2 ¥pi ¥left( ¥frac{s x / ¥Delta}{S} + ¥frac{t y / ¥Delta }{T} ¥right) ¥right] ¥exp 
+		¥left[ ¥frac{- j ¥pi ¥lambda z ( { ¥left( ¥frac{s}{S} ¥right) }^{2} + {¥left( ¥frac{t}{T} ¥right)}^{2} ) }
+		{n_{i} ¥Delta^2 } ¥right] ¥¥
+		&¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad ¥qquad 
+		Z_i^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT} ¥right)} 
+		P^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT}, ¥boldsymbol{¥mu}_{w} ¥right)} 
+	¥end{split} ¥¥
+	¥begin{split}
+		¥frac{¥partial^{2}}{¥partial x_{p} ¥partial ¥mu_{wi}} h_{¥mathcal{A}} (x, y, z, ¥boldsymbol{¥mu}_{w}) &=
+		j ¥gamma ¥sum¥limits_{s = - ¥frac{S}{2} }^{¥frac{S}{2} - 1} ¥sum¥limits_{t = - ¥frac{T}{2} }^{¥frac{T}{2} - 1} 
+		¥left( - j 2 ¥pi ¥frac{s / ¥Delta}{S} ¥right) ¥exp ¥left[ - j 2 ¥pi ¥left( ¥frac{s x / ¥Delta}{S} + ¥frac{t y / ¥Delta }{T} ¥right) ¥right]  ¥¥
+		&¥qquad ¥qquad ¥qquad ¥qquad 
+		¥exp ¥left[ ¥frac{- j ¥pi ¥lambda z ( { ¥left( ¥frac{s}{S} ¥right) }^2 + {¥left( ¥frac{t}{T} ¥right)}^2 ) }
+		{ n_{i} ¥Delta^2 } ¥right]
+		Z_i^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT} ¥right)} P^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT}, ¥boldsymbol{¥mu}_{w} ¥right)}
+	¥end{split} ¥¥
+	¥begin{split}
+		¥frac{¥partial^{2}}{¥partial y_{p} ¥partial ¥mu_{wi}} h_{¥mathcal{A}} (x, y, z, ¥boldsymbol{¥mu}_{w}) &= 
+		j ¥gamma ¥sum¥limits_{s = - ¥frac{S}{2} }^{¥frac{S}{2} - 1} ¥sum¥limits_{t = - ¥frac{T}{2} }^{¥frac{T}{2} - 1} 
+		¥left( - j 2 ¥pi ¥frac{t / ¥Delta}{T} ¥right) ¥exp ¥left[ - j 2 ¥pi ¥left( ¥frac{s x / ¥Delta}{S} + 
+		¥frac{t y / ¥Delta }{T} ¥right) ¥right]  ¥¥
+		&¥qquad ¥qquad ¥qquad ¥qquad 
+		¥exp ¥left[ ¥frac{- j ¥pi ¥lambda z ( { ¥left( ¥frac{s}{S} ¥right) }^{2} + 
+		{¥left( ¥frac{t}{T} ¥right)}^2 ) }{ n_{i} ¥Delta^2 } ¥right]
+		Z_i^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT} ¥right)} P^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT}, ¥boldsymbol{¥mu}_{w} ¥right)}
+    ¥end{split} ¥¥
+    ¥begin{split}
+    		¥frac{¥partial^{2}}{¥partial z_{p} ¥partial ¥mu_{wi}} h_{¥mathcal{A}} (x, y, z, ¥boldsymbol{¥mu}_{w}) &= 
+		j ¥gamma ¥sum¥limits_{s = - ¥frac{S}{2} }^{¥frac{S}{2} - 1} ¥sum¥limits_{t = - ¥frac{T}{2} }^{¥frac{T}{2} - 1} 
+		¥left( ¥frac{- j ¥pi ¥lambda ( { ¥left( ¥frac{s}{S} ¥right) }^{2} + {¥left( ¥frac{t}{T} ¥right)}^{2} ) }
+		{ n_{i} ¥Delta^{2} } ¥right) ¥exp ¥left[ - j 2 ¥pi ¥left( ¥frac{s x / ¥Delta}{S} + ¥frac{t y / ¥Delta }{T} ¥right) ¥right] ¥¥
+		& ¥qquad ¥qquad ¥qquad ¥qquad  
+		¥exp ¥left[ ¥frac{- j ¥pi ¥lambda z ( { ¥left( ¥frac{s}{S} ¥right) }^2 + {¥left( ¥frac{t}{T} ¥right)}^2 ) }{ n_i ¥Delta^2 } ¥right] 
+		Z_i^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT} ¥right)} P^{¥prime} {¥left( ¥frac{s}{cS}, ¥frac{t}{cT}, ¥boldsymbol{¥mu}_{w} ¥right)}.
+    ¥end{split}
+¥end{align*}
 
 
 
-\end{document}
+¥end{document}
